@@ -12,3 +12,5 @@ engine.add(entity);
 
 Under construction and needs a ton of help. If you want to help out, get in
 touch with me or fork this project and send pull requests. All are welcome!
+
+This is no where near done, and needs help.
