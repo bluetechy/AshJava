@@ -1,6 +1,8 @@
 package net.richardlord.ash.core;
 
-public class EntityList {
+import java.util.Iterator;
+
+public class EntityList implements Iterable<Entity> {
     private Entity head;
     private Entity tail;
     private int size;
@@ -74,6 +76,29 @@ public class EntityList {
 
     public int getSize() {
         return size;
+    }
+
+    @Override
+    public Iterator<Entity> iterator() {
+        return new Iterator<Entity>() {
+            private Entity current = head;
+            
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public Entity next() {
+                current = current.getNext();
+                return current;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 
 }
