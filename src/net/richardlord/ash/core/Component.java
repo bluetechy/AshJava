@@ -31,7 +31,7 @@ package net.richardlord.ash.core;
  * @author Erik Borgers
  * 
  */
-public class Component {
+public abstract class Component {
 
 	// Ash does not remember the Entity in a Component. 
 	// It implies an Entity "owns" a Component, while in Ash Components may be shared (says the blog)!

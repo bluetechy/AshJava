@@ -20,7 +20,7 @@ import net.richardlord.ash.tools.Print;
  * family that is managing such a collection. If it doesn't have one, it creates a new one. Either way, it then passes
  * the NodeList managed by the family back to the System that requested it.
  * 
- * The family is initialized with a node type. It uses reflection to determine what components that node type requires.
+ * The family is initialised with a node type. It uses reflection to determine what components that node type requires.
  * Whenever an entity is added to the engine it is passed to every family in the engine, and the families determine
  * whether that entity has the necessary components to join that family. If it does then the family will add it to its
  * NodeList.
@@ -38,11 +38,11 @@ class ComponentMatchingFamily implements IFamily {
 	private final NodeList nodes; // list of all nodes
 	private final Map<Entity, Node> entities; // all the entities with this node type (specific set of components)
 	private final Class<? extends Node> nodeClass; // the Node Class that this IFamily collects
-	private final ArrayList<Class<? extends Component>> components; // Component Classes in this Node. Key is the Class of the Component
+	private final java.util.List<Class<? extends Component>> components; // Component Classes in this Node. Key is the Class of the Component
 	private final Pool<Node> nodePool;
 	private final Engine engine;
 
-	private final ArrayList<EntitySystem> watchers; // Systems watching this family
+	private final java.util.List<EntitySystem> watchers; // Systems watching this family
 
 	/**
 	 * The family is initialised with a node type. It uses reflection to determine what components that node type
@@ -109,30 +109,19 @@ class ComponentMatchingFamily implements IFamily {
 	}
 
 	@Override
-	/**
-	 * The nodelist managed by this family. This is a reference that remains valid always
-	 * since it is retained and reused by Systems that use the list. i.e. we never recreate the list,
-	 * we always modify it in place.
-	 */
 	public NodeList getNodeList() {
 		return nodes;
 	}
 
 	@Override
-	/**
-	 * Called by the engine when an entity has been added to it. We check if the entity should be in
-	 * this family's NodeList and add it if appropriate. Return a new Node or null otherwise.
-	 */
 	public Node newEntity(Entity entity) {
+		// We check if the entity should be in this family's NodeList and add it if appropriate. 
 		return addIfMatch(entity);
 	}
 
 	@Override
-	/**
-	 * Called by the engine when an entity has been rmoved from it. We check if the entity is in
-	 * this family's NodeList and remove it if so. Return removed Node or null otherwise.
-	 */
 	public Node removeEntity(Entity entity) {
+		// Called by the engine when an entity has been removed from it. We check if the entity is in this family's NodeList and remove it if so. 
 		return removeIfMatch(entity);
 	}
 

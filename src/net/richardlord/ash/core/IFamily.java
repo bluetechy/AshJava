@@ -21,20 +21,24 @@ interface IFamily {
 	public Class<? extends Node> getNodeClass();
 
 	/**
-	 * Returns the NodeList managed by this class. This should be a reference that remains valid always since it is
+	 * Returns the NodeList managed by the implementations. This should be a reference that remains valid always since it is
 	 * retained and reused by Systems that use the list. i.e. never recreate the list, always modify it in place.
 	 */
 	public NodeList getNodeList();
 
 	/**
 	 * An entity has been added to the game. Test its components for inclusion of a new Node in the families NodeList.
-	 * Returns added Node or null if none. 
+	 * Returns added Node or null if none.
+	 * 
 	 */
 	public Node newEntity(Entity entity);
 
 	/**
 	 * An entity has been removed from the game. If it's in this family's NodeList it Node should be removed. Returns
 	 * removed Node or null
+	 * 
+	 * Called by the engine when an entity has been removed from it. We check if the entity is in
+	 * this family's NodeList and remove it if so. Return removed Node or null otherwise.
 	 */
 	public Node removeEntity(Entity entity);
 
