@@ -1,79 +1,26 @@
 package net.richardlord.ash.core;
 
-public class NodeList {
-    private Node head;
-    private Node tail;
-    private int size;
-    
-    public NodeList(){
-        size = 0;
-    }
+/**
+ * A collection of nodes.
+ * 
+ * <p>Systems within the engine access the components of entities via NodeLists. A NodeList contains
+ * a node for each Entity in the engine that has all the components required by the node. To iterate
+ * over a NodeList, start from the head and step to the next on each loop, until the returned value
+ * is null.</p>
+ * 
+ * <p>for( var node : Node = nodeList.head; node; node = node.next )
+ * {
+ *   // do stuff
+ * }</p>
+ * 
+ * <p>It is safe to remove items from a NodeList during the loop. When a Node is removed form the 
+ * NodeList it's previous and next properties still point to the nodes that were before and after
+ * it in the NodeList just before it was removed.</p>
+ * 
+ * @author Erik Borgers
+ */
 
-    public void add(Node node) {
-        if (isEmpty()) {
-            head = node;
-            tail = node;
-            node.setNext(null);
-            node.setPrevious(null);
-        } else {
-            tail.setNext(node);
-            node.setPrevious(tail);
-            node.setNext(null);
-            tail = node;
-        }
-        size++;
-    }
-
-    public void remove(Node node) {
-        if (head == node) {
-            head = head.getNext();
-        }
-
-        if (tail == node) {
-            tail = tail.getPrevious();
-        }
-
-        if (node.hasPrevious()) {
-            node.getPrevious().setNext(node.getNext());
-        }
-
-        if (node.hasNext()) {
-            node.getNext().setPrevious(node.getPrevious());
-        }
-        size--;
-    }
-
-    public void clear() {
-        while (!isEmpty()) {
-            Node node = head;
-            head = node.getNext();
-            remove(node);
-        }
-        tail = null;
-    }
-
-    public boolean isEmpty() {
-        return head == null;
-    }
-
-    public Node getHead() {
-        return head;
-    }
-
-    public void setHead(Node head) {
-        this.head = head;
-    }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public void setTail(Node tail) {
-        this.tail = tail;
-    }
-
-    public int getSize() {
-        return size;
-    }
+// TODO signalling for removing and adding is not implemented
+public class NodeList extends List<Node> {
 
 }
